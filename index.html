@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Todo Manager - Track and manage your daily tasks efficiently">
+  <meta name="keywords" content="todo, tasks, productivity, task manager">
+  <meta name="author" content="Todo App">
+  <title>Todo Manager - Task Management App</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-container" role="application" aria-label="Todo Manager Application">
+    <header class="header" role="banner">
+      <div class="header-content">
+        <h1>Todo Manager</h1>
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+          <button onclick="showTodo()" id="todo-btn" class="nav-btn" aria-pressed="true" aria-label="Switch to Todo App">Todo App</button>
+          <button onclick="showBlog()" id="blog-btn" class="nav-btn" aria-pressed="false" aria-label="Switch to Blog App">Blog App</button>
+        </nav>
+      </div>
+    </header>
+    
+    <main class="main-content" role="main">
+      <div class="content-wrapper">
+        <section id="todo-app" class="app-section" role="region" aria-label="Todo Application">
+          <header class="section-header">
+            <h2>My Tasks</h2>
+            <p class="section-description">Add, complete, and manage your daily tasks</p>
+          </header>
+          
+          <article class="form-container">
+            <form id="todo-form" class="todo-form" role="form" aria-label="Add new item form">
+              <fieldset>
+                <legend class="sr-only">Add New Item</legend>
+
+                <div class="input-group">
+                  <label for="note-type" class="sr-only">Note Type</label>
+                  <select id="note-type" class="note-type-selector" aria-label="Select note type">
+                    <option value="task" selected>Todo Task</option>
+                    <option value="image">Image Note (URL)</option>
+                    <option value="video">Video Note (URL)</option>
+                    <option value="audio">Audio Note (URL)</option>
+                    <option value="attachment">File Attachment</option>
+                  </select>
+                </div>
+
+                <div id="input-container">
+                  <!-- Fields will be dynamically injected here by JS -->
+                </div>
+
+                <div id="todo-help" class="help-text sr-only">Select a note type and fill in the details.</div>
+                <div class="button-group">
+                  <button type="submit" class="submit-btn" aria-label="Add item to list">Add Item</button>
+                </div>
+              </fieldset>
+            </form>
+          </article>
+          
+          <article class="list-container">
+            <header class="list-header">
+              <h3>My One-Time Notes</h3>
+              <span id="todo-count" class="task-count" aria-live="polite">0 items</span>
+            </header>
+            <ul id="todo-list" class="todo-list" role="list" aria-label="One-time notes and attachments"></ul>
+          </article>
+
+          <section class="repetitive-tasks-container" role="region" aria-label="Repetitive Tasks">
+            <header class="section-header">
+              <h2>Repetitive & Ongoing Tasks</h2>
+            </header>
+            <div class="repetitive-lists-wrapper">
+              <article class="repetitive-list-box">
+                <header class="list-header">
+                  <h3>Daily</h3>
+                </header>
+                <ul id="daily-list" class="todo-list" role="list" aria-label="Daily repetitive tasks"></ul>
+              </article>
+              <article class="repetitive-list-box">
+                <header class="list-header">
+                  <h3>Weekly</h3>
+                </header>
+                <ul id="weekly-list" class="todo-list" role="list" aria-label="Weekly repetitive tasks"></ul>
+              </article>
+              <article class="repetitive-list-box">
+                <header class="list-header">
+                  <h3>Monthly</h3>
+                </header>
+                <ul id="monthly-list" class="todo-list" role="list" aria-label="Monthly repetitive tasks"></ul>
+              </article>
+              <article class="repetitive-list-box">
+                <header class="list-header">
+                  <h3>Ongoing</h3>
+                </header>
+                <ul id="ongoing-list" class="todo-list" role="list" aria-label="Ongoing repetitive tasks"></ul>
+              </article>
+            </div>
+          </section>
+
+        </section>
+        
+        <section id="blog-iframe" class="iframe-section" role="region" aria-label="Blog Application" style="display: none;">
+          <header class="section-header">
+            <h2>Blog Application</h2>
+            <p class="section-description">Create and manage your blog posts</p>
+          </header>
+          <div class="iframe-container">
+            <iframe src="blog.html" width="100%" height="600px" frameborder="0" title="Blog Application" aria-label="Blog application content"></iframe>
+          </div>
+        </section>
+      </div>
+    </main>
+    
+    <footer class="footer" role="contentinfo">
+      <div class="footer-content">
+        <p>&copy; 2024 Todo Manager. Built with HTML, CSS, and JavaScript.</p>
+        <nav class="footer-nav" role="navigation" aria-label="Footer navigation">
+          <ul>
+            <li><a href="#" aria-label="About this application">About</a></li>
+            <li><a href="#" aria-label="Help and support">Help</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </div>
+  
+  <script src="js/todo.js"></script>
+  <script>
+    function showTodo() {
+      document.getElementById('todo-app').style.display = 'flex';
+      document.getElementById('blog-iframe').style.display = 'none';
+      document.getElementById('todo-btn').classList.add('active');
+      document.getElementById('todo-btn').setAttribute('aria-pressed', 'true');
+      document.getElementById('blog-btn').classList.remove('active');
+      document.getElementById('blog-btn').setAttribute('aria-pressed', 'false');
+    }
+    
+    function showBlog() {
+      document.getElementById('todo-app').style.display = 'none';
+      document.getElementById('blog-iframe').style.display = 'flex';
+      document.getElementById('blog-btn').classList.add('active');
+      document.getElementById('blog-btn').setAttribute('aria-pressed', 'true');
+      document.getElementById('todo-btn').classList.remove('active');
+      document.getElementById('todo-btn').setAttribute('aria-pressed', 'false');
+    }
+    
+    // Show todo by default
+    showTodo();
+  </script>
+</body>
+</html> 

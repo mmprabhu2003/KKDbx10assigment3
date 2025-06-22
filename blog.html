@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blog Posting - Create, edit, and manage your blog posts">
+  <meta name="keywords" content="blog, posts, writing, content management">
+  <meta name="author" content="Blog App">
+  <title>Blog Posting - Content Management App</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-container" role="application" aria-label="Blog Posting Application">
+    <header class="header" role="banner">
+      <div class="header-content">
+        <h1>Blog Posting</h1>
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+          <button onclick="showBlog()" id="blog-btn" class="nav-btn" aria-pressed="true" aria-label="Switch to Blog App">Blog App</button>
+          <button onclick="showTodo()" id="todo-btn" class="nav-btn" aria-pressed="false" aria-label="Switch to Todo App">Todo App</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main-content" role="main">
+      <div class="content-wrapper">
+        <section id="blog-app" class="app-section" role="region" aria-label="Blog Application">
+          <header class="section-header">
+            <h2>Create Blog Post</h2>
+            <p class="section-description">Write, edit, and manage your blog posts</p>
+          </header>
+
+          <article class="form-container">
+            <form id="blog-form" class="blog-form" role="form" aria-label="Create new blog post form">
+              <fieldset>
+                <legend class="sr-only">Create New Blog Post</legend>
+                <div class="input-group">
+                  <label for="blog-title" class="sr-only">Post Title</label>
+                  <input type="text" id="blog-title" placeholder="Title" required aria-describedby="title-help">
+                </div>
+                <div id="title-help" class="help-text sr-only">Enter a descriptive title for your blog post</div>
+
+                <div class="textarea-group">
+                  <label for="blog-content" class="sr-only">Post Content</label>
+                  
+                  <!-- Rich Text Toolbar -->
+                  <div class="rich-text-toolbar">
+                    <select id="font-size" class="toolbar-select">
+                      <option value="16">16px</option>
+                      <option value="18">18px</option>
+                      <option value="20" selected>20px</option>
+                      <option value="24">24px</option>
+                      <option value="28">28px</option>
+                      <option value="32">32px</option>
+                    </select>
+                    
+                    <select id="font-family" class="toolbar-select">
+                      <option value="Arial, sans-serif">Arial</option>
+                      <option value="'Times New Roman', serif">Times New Roman</option>
+                      <option value="'Courier New', monospace">Courier New</option>
+                      <option value="Georgia, serif">Georgia</option>
+                      <option value="Verdana, sans-serif">Verdana</option>
+                      <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+                    </select>
+                    
+                    <button type="button" id="bold-btn" class="toolbar-btn" title="Bold">B</button>
+                    <button type="button" id="italic-btn" class="toolbar-btn" title="Italic">I</button>
+                    <button type="button" id="underline-btn" class="toolbar-btn" title="Underline">U</button>
+                    <button type="button" id="clear-format-btn" class="toolbar-btn" title="Clear Formatting">Clear</button>
+                  </div>
+                  
+                  <div id="blog-content" class="rich-text-editor" contenteditable="true" placeholder="Write your post..." required aria-describedby="content-help"></div>
+                </div>
+                <div id="content-help" class="help-text sr-only">Write the main content of your blog post</div>
+
+                <div class="input-group">
+                  <label for="featured-image">Featured Image URL (Optional)</label>
+                  <input type="url" id="featured-image" name="featuredImage" placeholder="https://example.com/image.jpg">
+                </div>
+
+                <div class="input-group">
+                  <label for="tags">Tags (comma separated)</label>
+                  <input type="text" id="tags" name="tags" placeholder="e.g. tech, travel, life">
+                </div>
+
+                <div class="button-group">
+                  <button type="submit" class="submit-btn" aria-label="Publish blog post">Publish</button>
+                  <button type="button" id="clear-form-btn" class="secondary-btn" aria-label="Clear form">Clear</button>
+                </div>
+              </fieldset>
+            </form>
+            <div class="form-footer">
+              <span id="char-count">0 characters</span>
+              <span id="word-count">0 words</span>
+            </div>
+          </article>
+
+          <aside class="live-preview-container" role="complementary">
+            <header class="list-header">
+              <h3>Live Preview</h3>
+            </header>
+            <div id="live-preview" class="blog-view">
+              <h2>Your Title Here</h2>
+              <p>Your content will appear here as you type...</p>
+            </div>
+          </aside>
+
+          <article class="posts-container">
+            <header class="list-header">
+              <h3>Blog Posts</h3>
+              <div class="filter-group">
+                <input type="text" id="search-input" placeholder="Search posts...">
+              </div>
+              <span id="blog-count" class="post-count" aria-live="polite">0 posts</span>
+            </header>
+            <div id="blog-list" class="blog-list" role="list" aria-label="Blog posts list"></div>
+            <div id="blog-view" class="blog-view" role="article" aria-label="Blog post view" style="display:none;"></div>
+          </article>
+        </section>
+
+        <section id="todo-iframe" class="iframe-section" role="region" aria-label="Todo Application" style="display: none;">
+          <header class="section-header">
+            <h2>Todo Application</h2>
+            <p class="section-description">Manage your daily tasks and to-dos</p>
+          </header>
+          <div class="iframe-container">
+            <iframe src="index.html" width="100%" height="600px" frameborder="0" title="Todo Application" aria-label="Todo application content"></iframe>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+      <div class="footer-content">
+        <p>&copy; 2024 Blog Posting. Built with HTML, CSS, and JavaScript.</p>
+        <nav class="footer-nav" role="navigation" aria-label="Footer navigation">
+          <ul>
+            <li><a href="#" aria-label="About this application">About</a></li>
+            <li><a href="#" aria-label="Help and support">Help</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/blog.js"></script>
+  <script>
+    function showBlog() {
+      document.getElementById('blog-app').style.display = 'flex';
+      document.getElementById('todo-iframe').style.display = 'none';
+      document.getElementById('blog-btn').classList.add('active');
+      document.getElementById('blog-btn').setAttribute('aria-pressed', 'true');
+      document.getElementById('todo-btn').classList.remove('active');
+      document.getElementById('todo-btn').setAttribute('aria-pressed', 'false');
+    }
+
+    function showTodo() {
+      document.getElementById('blog-app').style.display = 'none';
+      document.getElementById('todo-iframe').style.display = 'flex';
+      document.getElementById('todo-btn').classList.add('active');
+      document.getElementById('todo-btn').setAttribute('aria-pressed', 'true');
+      document.getElementById('blog-btn').classList.remove('active');
+      document.getElementById('blog-btn').setAttribute('aria-pressed', 'false');
+    }
+
+    // Show blog by default
+    showBlog();
+  </script>
+</body>
+</html>
